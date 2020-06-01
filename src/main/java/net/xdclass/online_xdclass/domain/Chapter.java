@@ -1,6 +1,9 @@
 package net.xdclass.online_xdclass.domain;
 
+import org.apache.catalina.LifecycleState;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * 章对象
@@ -16,6 +19,16 @@ public class Chapter {
     private Integer ordered;
 
     private Date createTime;
+
+    private List<Episode> episodeList;
+
+    public List<Episode> getEpisodeList() {
+        return episodeList;
+    }
+
+    public void setEpisodeList(List<Episode> episodeList) {
+        this.episodeList = episodeList;
+    }
 
     public Integer getId() {
         return id;

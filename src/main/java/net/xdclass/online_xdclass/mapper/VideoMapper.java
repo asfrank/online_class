@@ -2,6 +2,7 @@ package net.xdclass.online_xdclass.mapper;
 
 import net.xdclass.online_xdclass.domain.Video;
 import net.xdclass.online_xdclass.domain.VideoBanner;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,4 +13,7 @@ public interface VideoMapper {
 
     // 首页轮播图列表
     List<VideoBanner> listVideoBanner();
+
+    // 查询视频详情
+    Video findDetailById(@Param("video_id") int videoId);
 }
