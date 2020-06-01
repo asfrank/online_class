@@ -1,6 +1,4 @@
-package net.xdclass.online_xdclass.domain;
-
-import org.apache.catalina.LifecycleState;
+package net.xdclass.online_xdclass.model.entity;
 
 import java.util.Date;
 import java.util.List;

@@ -1,9 +1,10 @@
 package net.xdclass.online_xdclass.service.impl;
 
-import net.xdclass.online_xdclass.domain.User;
+import net.xdclass.online_xdclass.model.entity.User;
 import net.xdclass.online_xdclass.mapper.UserMapper;
 import net.xdclass.online_xdclass.service.UserService;
 import net.xdclass.online_xdclass.utils.CommonUtils;
+import net.xdclass.online_xdclass.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,17 @@ public class UserServiceImpl implements UserService {
             return userMapper.save(user);
         }else {
             return -1;
+        }
+    }
+
+    @Override
+    public String findByPhoneAndPwd(String phone, String pwd) {
+        User user = userMapper.findByPhoneAndPwd(phone, CommonUtils.MD5(pwd));
+        if (user != null) {
+            String token = JWTUtils.genJsonWebToken(user);
+            return token;
+        }else {
+            return null;
         }
     }
 
