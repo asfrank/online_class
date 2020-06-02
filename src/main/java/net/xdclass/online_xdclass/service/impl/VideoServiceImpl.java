@@ -4,6 +4,7 @@ import net.xdclass.online_xdclass.config.CacheKeyManager;
 import net.xdclass.online_xdclass.model.entity.Video;
 import net.xdclass.online_xdclass.model.entity.VideoBanner;
 import net.xdclass.online_xdclass.mapper.VideoMapper;
+import net.xdclass.online_xdclass.model.entity.VideoOrder;
 import net.xdclass.online_xdclass.service.VideoService;
 import net.xdclass.online_xdclass.utils.BaseCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +64,24 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public Video findDetailById(int videoId) {
-        //使用mybatis关联复杂查询
-        Video video = videoMapper.findDetailById(videoId);
 
-        return video;
+        String videoCacheKey = String.format(CacheKeyManager.VIDEO_DETAIL, videoId);
+        try {
+            Object cacheObj = baseCache.getOneHourCache().get(videoCacheKey, ()->{
+                //使用mybatis关联复杂查询
+                Video video = videoMapper.findDetailById(videoId);
+                return video;
+            });
+
+            if (cacheObj instanceof Video) {
+                Video video = (Video) cacheObj;
+                return video;
+            }
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
