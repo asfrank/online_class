@@ -13,7 +13,7 @@ public class PlayRecord {
 
     private Integer videoId;
 
-    private Integer current_num;
+    private Integer currentNum;
 
     private Integer episodeId;
 
@@ -43,12 +43,12 @@ public class PlayRecord {
         this.videoId = videoId;
     }
 
-    public Integer getCurrent_num() {
-        return current_num;
+    public Integer getCurrentNum() {
+        return currentNum;
     }
 
-    public void setCurrent_num(Integer current_num) {
-        this.current_num = current_num;
+    public void setCurrentNum(Integer currentNum) {
+        this.currentNum = currentNum;
     }
 
     public Integer getEpisodeId() {
@@ -73,7 +73,7 @@ public class PlayRecord {
         sb.append("id=").append(id);
         sb.append(", userId=").append(userId);
         sb.append(", videoId=").append(videoId);
-        sb.append(", current_num=").append(current_num);
+        sb.append(", current_num=").append(currentNum);
         sb.append(", episodeId=").append(episodeId);
         sb.append(", createTime=").append(createTime);
         sb.append('}');
