@@ -23,7 +23,22 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public List<Video> listVideo() {
-        return videoMapper.listVideo();
+
+        try {
+            Object cacheObj = baseCache.getTenMinuteCache().get(CacheKeyManager.INDEX_VIDEO_LIST, ()->{
+                List<Video> videoList = videoMapper.listVideo();
+                return videoList;
+            });
+
+            if (cacheObj instanceof List) {
+                List<Video> videoList = (List<Video>) cacheObj;
+                return videoList;
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override
