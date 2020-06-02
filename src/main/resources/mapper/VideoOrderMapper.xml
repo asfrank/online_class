@@ -13,4 +13,8 @@
                 #{videoId,jdbcType=INTEGER},#{videoTitle,jdbcType=VARCHAR},#{videoImg,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER})
     </insert>
 
+    <select id="listOrderByUserId" resultType="VideoOrder">
+        select * from video_order where user_id=#{user_id} order by create_time desc
+    </select>
+
 </mapper>
